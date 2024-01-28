@@ -44,10 +44,15 @@ def enable_chat_history_QA(func):
             except:
                 pass
         
-        context = 'PLACEHOLDER'
+        with open('context.txt', 'r') as f:
+            context = f.read()
+
         # to show chat history on ui
         if "messages" not in st.session_state:
-            st.session_state["messages"] = [{"role": "assistant", "content": f"Based on your profile I have found the following infomation that may be relevant: {context}. How can I help you?"}]
+            st.session_state["messages"] = [{"role": "assistant", "content": f"""Based on your profile I have found the following infomation that may be relevant: 
+{context}
+
+How can I help you?"""}]
         for msg in st.session_state["messages"]:
             st.chat_message(msg["role"]).write(msg["content"])
 
