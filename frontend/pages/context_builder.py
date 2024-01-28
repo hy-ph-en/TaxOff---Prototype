@@ -13,6 +13,7 @@ from langchain_openai import ChatOpenAI
 from openai import OpenAI
 from langchain.memory import ConversationBufferMemory
 from streaming import StreamHandler
+from rag_step import drag_race
 
 # Assuming utils and other necessary imports are correctly defined
 
@@ -21,6 +22,25 @@ st.header("Basic Chatbot")
 st.write("Allows users to interact with the LLM")
 
 client = OpenAI()
+
+
+def summarize_text_file():
+    # Set your OpenAI API key
+
+    # Read the content of the file
+    with open("context.txt", "r") as file:
+        text_content = file.read()
+
+    # Call GPT-4 to summarize the text
+    response = client.completions.create(
+        model="gpt-4-0125-preview",  # Use the latest available version of the model
+        prompt=f"Summarize the following text in great detail, which a tax consultant would use:\n\n{text_content}",
+    )
+
+    text = response.choices[0].text.strip()
+    with open("context-summary.txt", "w") as f:
+        f.write(text)
+
 
 llm = ChatOpenAI(temperature=0.25, model_name="gpt-4-0125-preview", streaming=True)
 prompt = ChatPromptTemplate(
@@ -105,7 +125,14 @@ class Chatbot:
                 ):
                     history = build_history(chain.memory)
                     simple_json = gpt_simplify(history)
-                    st.write(simple_json)
+                    with open("chat_history.json", "w") as f:
+                        json.dump(simple_json, f, indent=2)
+                    st.write(
+                        "Thank you for providing the context!, I have enough information to build a profile, why don't you head over to the QA section to get started on your planning?"
+                    )
+
+                    drag_race()
+                    summarize_text_file()
 
                 # st_cb = StreamHandler(st.empty())
                 inputs = {
