@@ -44,7 +44,7 @@ def enable_chat_history_QA(func):
             except:
                 pass
         
-        with open('context.txt', 'r') as f:
+        with open('context_summary.txt', 'r') as f:
             context = f.read()
 
         # to show chat history on ui

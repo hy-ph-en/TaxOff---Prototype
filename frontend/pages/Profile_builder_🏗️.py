@@ -17,8 +17,8 @@ from streaming import StreamHandler
 # Assuming utils and other necessary imports are correctly defined
 
 st.set_page_config(page_title="Chatbot", page_icon="💬")
-st.header("Basic Chatbot")
-st.write("Allows users to interact with the LLM")
+st.header("Profile builder 🏗️")
+st.write("Tell us about you so we can optomize your taxes!")
 
 client = OpenAI()
 
