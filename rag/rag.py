@@ -4,9 +4,9 @@ from pinecone import Pinecone, PodSpec
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 
-openai_api_key = "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"
+openai_api_key = ""
 model_name = 'text-embedding-ada-002'
-pinecone_api_key = "a3ada374-cceb-4712-b907-99a33682b108"
+pinecone_api_key = ""
 pinecone_environment = 'us_west1-gcp'
 
 # Docs

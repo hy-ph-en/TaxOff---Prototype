@@ -18,8 +18,8 @@ from rag_step import drag_race
 # Assuming utils and other necessary imports are correctly defined
 
 st.set_page_config(page_title="Chatbot", page_icon="💬")
-st.header("Basic Chatbot")
-st.write("Allows users to interact with the LLM")
+st.header("TaxOff")
+# st.write("Allows users to interact with the LLM")
 
 client = OpenAI()
 
@@ -32,12 +32,22 @@ def summarize_text_file():
         text_content = file.read()
 
     # Call GPT-4 to summarize the text
-    response = client.completions.create(
+    print("#" * 20)
+    print("Summarizing the text")
+    response = client.chat.completions.create(
         model="gpt-4-0125-preview",  # Use the latest available version of the model
-        prompt=f"Summarize the following text in great detail, which a tax consultant would use:\n\n{text_content}",
+        messages=[
+            {
+                "role": "system",
+                "content": "You are a helpful assistant that can Summarize the following text in great detail, which a tax consultant would use",
+            },
+            {"role": "user", "content": text_content},
+        ],
     )
 
-    text = response.choices[0].text.strip()
+    text = response.choices[0].message.content
+    print(text)
+
     with open("context-summary.txt", "w") as f:
         f.write(text)
 
@@ -133,6 +143,10 @@ class Chatbot:
 
                     drag_race()
                     summarize_text_file()
+                    with open("context-summary.txt", "r") as f:
+                        summary = f.read()
+
+                    st.write(summary)
 
                 # st_cb = StreamHandler(st.empty())
                 inputs = {

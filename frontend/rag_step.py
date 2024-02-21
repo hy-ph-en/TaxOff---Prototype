@@ -15,7 +15,12 @@ from langchain_openai import OpenAIEmbeddings
 
 # from langchain.embeddings.openai import OpenAIEmbeddings
 
-os.environ["OPENAI_API_KEY"] = "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"
+# SET OPENAI_API_KEY
+if "OPENAI_API_KEY" not in os.environ:
+    print(
+        "WARNING: OPENAI_API_KEY not set, either run: export OPEN_API_KEY=<key> or set it in the code in taxify.py and rag_step.py"
+    )
+    os.environ["OPENAI_API_KEY"] = ""
 
 documents = []
 # Create a List of Documents from all of our files in the ./docs folder

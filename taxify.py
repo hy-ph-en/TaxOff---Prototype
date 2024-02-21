@@ -14,7 +14,12 @@ from langchain_openai import OpenAIEmbeddings
 
 # from langchain.embeddings.openai import OpenAIEmbeddings
 
-os.environ["OPENAI_API_KEY"] = ""
+# SET OPENAI_API_KEY
+if "OPENAI_API_KEY" not in os.environ:
+    print(
+        "WARNING: OPENAI_API_KEY not set, either run: export OPEN_API_KEY=<key> or set it in the code in taxify.py and rag_step.py"
+    )
+    os.environ["OPENAI_API_KEY"] = ""
 
 documents = []
 # Create a List of Documents from all of our files in the ./docs folder
@@ -47,7 +52,7 @@ emb_func = OpenAIEmbeddings(
     # model="text-embedding-3-large",
     deployment="text-embedding-3-large",
     chunk_size=256,
-    show_progress_bar=True,
+    # show_progress_bar=True,
     retry_max_seconds=120,
 )
 
@@ -62,7 +67,7 @@ else:
             # model="text-embedding-3-large",
             deployment="text-embedding-3-large",
             chunk_size=256,
-            show_progress_bar=True,
+            # show_progress_bar=True,
             retry_max_seconds=120,
         ),
         persist_directory="./data",
