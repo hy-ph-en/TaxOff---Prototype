@@ -6,10 +6,8 @@ from langchain.llms import OpenAI
 from langchain.chains import ConversationChain
 
 st.set_page_config(page_title="Chatbot", page_icon="💬")
-st.header('Basic Chatbot')
-st.write('Allows users to interact with the LLM')
-
-
+st.header('Tax assistant 💁')
+st.write('Let an AI tell you about opportunities to optomize your taxes and ask it questions')
 
 class Basic:
 
