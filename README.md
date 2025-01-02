@@ -1,5 +1,12 @@
 # TAX-OFF
 
+A safe and efficient tax optimization system leveraging LLMs to create personalized taxation plans for UK businesses and individuals. The system integrates UK governmental schemes and tax incentives to provide optimal financial planning while maintaining compliance and safety.
+
+## Key Features
+- LLM-powered tax optimization
+- UK tax scheme integration  
+- Safe system architecture
+- Multi-disciplinary approach
 ## To Run:
 
 ### LOCAL [LINUX/MAC]
